@@ -3,122 +3,489 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="interactive dragon.css">
-    <title>My Portfolio website</title>
+    <title>Ahoshan Habib - Web Developer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      /* Base styles */
+      :root {
+        --primary: #00b894;
+        --primary-light: #55efc4;
+        --secondary: #1e272e;
+        --dark: #121212;
+        --accent: #a29bfe;
+        --text: #dfe6e9;
+        --bg-dark: #1e272e;
+        --card-bg: #2d3436;
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: var(--text);
+        background-color: var(--dark);
+        overflow-x: hidden;
+      }
+      
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+      
+      h1, h2, h3, h4 {
+        margin-bottom: 1rem;
+        color: var(--text);
+        font-weight: 700;
+      }
+      
+      img {
+        max-width: 70%;
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+      
+      img:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 15px 30px rgba(0,184,148,0.3);
+      }
+      
+      .btn {
+        display: inline-block;
+        background-color: var(--primary);
+        color: var(--dark);
+        padding: 12px 30px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        margin-top: 20px;
+        border: 2px solid var(--primary);
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+      
+      .btn:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 0;
+        background-color: var(--secondary);
+        transition: all 0.3s ease;
+        z-index: -1;
+      }
+      
+      .btn:hover {
+        color: var(--primary);
+      }
+      
+      .btn:hover:after {
+        height: 100%;
+      }
+      
+      .highlight {
+        color: var(--primary);
+        font-weight: 600;
+      }
+      
+      /* Header */
+      header {
+        padding: 100px 0 80px;
+        text-align: center;
+        background: linear-gradient(135deg, var(--dark) 0%, var(--bg-dark) 100%);
+        color: white;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 80px;
+      }
+      
+      header::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, var(--primary) 0%, transparent 70%);
+        opacity: 0.1;
+      }
+      
+      header::after {
+        content: '';
+        position: absolute;
+        bottom: -50px;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background-color: var(--dark);
+        clip-path: polygon(0 0, 100% 50%, 100% 100%, 0 100%);
+      }
+      
+      header h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        color: white;
+        position: relative;
+      }
+      
+      header h3 {
+        font-size: 1.6rem;
+        font-weight: 400;
+        margin-bottom: 2rem;
+        color: var(--primary-light);
+        opacity: 0.9;
+      }
+      
+      /* About Section */
+      .about {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        margin-bottom: 100px;
+        align-items: center;
+        position: relative;
+      }
+      
+      .about::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+        opacity: 0.1;
+        z-index: -1;
+        border-radius: 50%;
+      }
+      
+      .about-content, .about-image {
+        align-content: center;
+        flex: 1 1 400px;
+      }
+      
+      .about-content p {
+        margin-bottom: 20px;
+        font-size: 1.1rem;
+        line-height: 1.8;
+      }
+      
+      .about-image, .dream-image {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+      .about-image img, .dream-image img {
+        display: block;
+        margin: 0 auto;
+      }
+      
+      /* Dream Section */
+      .dream {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 40px;
+        margin-bottom: 100px;
+        align-items: center;
+        background-color: var(--card-bg);
+        padding: 60px 30px;
+        border-radius: 16px;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .dream::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+      }
+      
+      .dream-content, .dream-image {
+        flex: 1 1 400px;
+      }
+      
+      .dream h2 {
+        font-size: 2.2rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .dream h3 {
+        font-size: 1.4rem;
+        color: var(--primary-light);
+        margin-bottom: 1.5rem;
+      }
+      
+      .dream p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+      }
+      
+      /* Experience Section */
+      .experiences {
+        margin-bottom: 100px;
+      }
+      
+      .experiences h2 {
+        font-size: 2.2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        position: relative;
+        display: inline-block;
+      }
+      
+      .experiences h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
+      }
+      
+      .experience {
+        padding: 30px;
+        border-left: 4px solid var(--primary);
+        margin-bottom: 30px;
+        background-color: var(--card-bg);
+        border-radius: 0 16px 16px 0;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .experience::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, var(--primary) 0%, transparent 100%);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        z-index: 0;
+      }
+      
+      .experience:hover {
+        transform: translateX(10px);
+      }
+      
+      .experience:hover::before {
+        opacity: 0.05;
+      }
+      
+      .experience h4 {
+        font-size: 1.3rem;
+        color: var(--primary);
+        margin-bottom: 1rem;
+        position: relative;
+        z-index: 1;
+      }
+      
+      .experience p {
+        position: relative;
+        z-index: 1;
+        font-size: 1.1rem;
+        line-height: 1.7;
+      }
+      
+      .experience-new {
+        position: relative;
+      }
+      
+      .experience-new::after {
+        content: 'NEW';
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: var(--primary);
+        color: var(--dark);
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+      
+      /* Footer */
+      footer {
+        background-color: var(--secondary);
+        color: white;
+        text-align: center;
+        padding: 40px 0;
+        margin-top: 50px;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+      }
+      
+      .social-icons {
+        margin: 25px 0;
+      }
+      
+      .social-icons a {
+        color: var(--text);
+        font-size: 1.8rem;
+        margin: 0 15px;
+        transition: all 0.3s ease;
+        display: inline-block;
+      }
+      
+      .social-icons a:hover {
+        color: var(--primary);
+        transform: translateY(-5px);
+      }
+      
+      /* Responsive */
+      @media screen and (max-width: 768px) {
+        header {
+          padding: 70px 0 100px;
+        }
+        
+        header h1 {
+          font-size: 2.5rem;
+        }
+        
+        .about, .dream {
+          flex-direction: column;
+        }
+        
+        .dream-image {
+          order: -1;
+        }
+        
+        .experience {
+          padding: 25px;
+        }
+      }
+      
+      @media screen and (max-width: 480px) {
+        header h1 {
+          font-size: 2rem;
+        }
+        
+        header h3 {
+          font-size: 1.2rem;
+        }
+        
+        .experience {
+          padding: 20px;
+        }
+      }
+      
+      /* Animations */
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      
+      section {
+        animation: fadeIn 0.8s ease forwards;
+      }
+      
+      .about {
+        animation-delay: 0.2s;
+      }
+      
+      .dream {
+        animation-delay: 0.4s;
+      }
+      
+      .experiences {
+        animation-delay: 0.6s;
+      }
+    </style>
   </head>
   <body>
-    
- <h2> Welcome to <span class="purple">Ahoshan Habib </span> Website </h2>
-    <h3> Web designer & Web developer </h3>
-    <section class="containe"> 
-    <div class="half"> 
-    <p> Hello! visitors again welcome in my website.I am learning web development.I had already learned <span class="purple"> HTML & CSS</span>.Now I am learning <span class="purple"> HTML5,Java script, Bootstrap </span> etc. I had made this website just for practicing coads.If you have any website which needs to develop.You can contact with me by pressing hire/Facebook button.Otherwise
-Emai /phone me</p>
-   </div>
-    <div class="half">
-<div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpFD4Zqy05bZGDBVHAbVpVNK-r3v9wn-o86_zz6czm3-kZE5HuBRNiw6Axca6Tt1jEu9TL_69vgaq4HZGGPkYxmJVLVbNdT6UWrzS4pEe51SMVdYkw-TverVT5ZaVNYAD_PanWKYSZof4n/s2048/IMG_20210130_145733.jpg" style="display: block; padding: 1em 0; text-align: center; "><img alt="My photo." border="0" height="320" data-original-height="2048" data-original-width="1520" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpFD4Zqy05bZGDBVHAbVpVNK-r3v9wn-o86_zz6czm3-kZE5HuBRNiw6Axca6Tt1jEu9TL_69vgaq4HZGGPkYxmJVLVbNdT6UWrzS4pEe51SMVdYkw-TverVT5ZaVNYAD_PanWKYSZof4n/s320/IMG_20210130_145733.jpg" alt="My picture"/> </a></div>
-      <a class="btn" href="https://www.upwork.com/freelancers/~015b7882369e06222a"> Hire </a> 
-    </div> 
+    <header>
+      <div class="container">
+        <h1>Welcome to <span class="highlight">Ahoshan Habib</span>'s Portfolio</h1>
+        <h3>Web Designer & Developer</h3>
+      </div>
+    </header>
+
+    <main class="container">
+      <!-- About Section -->
+      <section class="about">
+        <div class="about-content">
+          <h2>About Me</h2>
+          <p>Hello! Welcome to my digital workspace. I am passionate about creating elegant, functional web experiences and have mastered <span class="highlight">HTML & CSS</span> to bring designs to life. Currently, I'm expanding my skills with <span class="highlight">HTML5, JavaScript, and Bootstrap</span> to build more dynamic and responsive websites.</p>
+          <p>This portfolio showcases my journey and skills in web development. If you need a website that stands out from the crowd with modern design and smooth functionality, I'd love to collaborate with you.</p>
+          <a href="https://www.upwork.com/freelancers/~015b7882369e06222a" class="btn">Hire Me <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="about-image">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiPjRlUJPNUwBpyXkmWZW9Vzr_wei5hwicUcMAj90yhn8RtaI-cTuZ7GOf5Sq6YjrgmmCQqrcbZj6BHJER32gmdeOvYi70eO3qlCwYZxWcgt12_LRqUXNbmn7I1E6GyYQif2hRKZycJ3C7tkhcLzONxHh2KOuRJoUPI0GQK-CeCk0sv-qKsCu65upeexrwn/s1600/IMG_7367.JPG" alt="Ahoshan Habib" />
+        </div>
       </section>
-    
-    
- <section class="containe"> 
-    <div class="half">
-    <h2> BIG DREAM </h2>
-    
-      <h3> Become a web developer </h3>
-  
-      <p>I have a dream. I want to make a popular website in future. For this I will learn complete web development.After learning web development. I also learn programming & Android app making.</p> </div>
-   <div class="half">
-   
-    <div class="separator" style="clear: both;"><a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZvjDcinOJ63F6I4-ovb2ISAbVBaXQn8YfYNLvuFNJvE55gH1f2BbAHZnAN7mjdmedTuYW0WhFZG0wJbaImFBG7rLlULME8IpR3_UPS4FBcPXzkXg4IDeE9enveRCOCA1A4ff3p8Bw_IWu/s734/IMG_20201204_220528.jpg" style="display: block; padding: 1em 0; text-align: center; "><img alt="" border="0" width="320" data-original-height="500" data-original-width="734" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZvjDcinOJ63F6I4-ovb2ISAbVBaXQn8YfYNLvuFNJvE55gH1f2BbAHZnAN7mjdmedTuYW0WhFZG0wJbaImFBG7rLlULME8IpR3_UPS4FBcPXzkXg4IDeE9enveRCOCA1A4ff3p8Bw_IWu/s320/IMG_20201204_220528.jpg"/></a></div>
-    </div>
-    </section>
-   <section>
-	  <div class="experience"> 
-    <h2> EXPERIENCES </h2>
-    <h4> January 2020-November 2020 </h4>
-      <p> I had learned HTML & CSS And practice this things.I also made this web.</p>
-   </div>
-   <div class="experience"> 
-   <h4> November 2020-present </h4>
-   <p> Now i am master in HTML & CSS and learning JS basic and fundamental,HTML5. </p>
-    </div>
-   </section> 
-    </div>  
+
+      <!-- Dream Section -->
+      <section class="dream">
+        <div class="dream-content">
+          <h2>BIG DREAM</h2>
+          <h3>Become an Elite Web Developer</h3>
+          <p>I envision creating websites and applications that not only look stunning but also solve real-world problems. My goal is to develop a popular platform that reaches thousands of users worldwide. To achieve this vision, I'm fully committed to mastering the complete web development stack, from front-end to back-end technologies.</p>
+          <p>After establishing myself in web development, I plan to expand my expertise to include advanced programming concepts and mobile app development, creating a seamless ecosystem of digital products.</p>
+        </div>
+        <div class="dream-image">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZvjDcinOJ63F6I4-ovb2ISAbVBaXQn8YfYNLvuFNJvE55gH1f2BbAHZnAN7mjdmedTuYW0WhFZG0wJbaImFBG7rLlULME8IpR3_UPS4FBcPXzkXg4IDeE9enveRCOCA1A4ff3p8Bw_IWu/s320/IMG_20201204_220528.jpg" alt="Dream visualization" />
+        </div>
+      </section>
+
+      <!-- Experience Section -->
+      <section class="experiences">
+        <h2>EXPERIENCES</h2>
+        <div class="experience">
+          <h4>January 2020 - November 2020</h4>
+          <p>I built a strong foundation in web development by mastering HTML & CSS fundamentals. During this period, I practiced extensively by building various web layouts and components, including this portfolio website.</p>
+        </div>
+        <div class="experience">
+          <h4>November 2020 - 2021</h4>
+          <p>Advanced to becoming proficient in HTML & CSS while expanding my knowledge into JavaScript fundamentals and modern HTML5 features. I've been creating more interactive and dynamic web experiences with these expanded skills.</p>
+        </div>
+        <div class="experience experience-new">
+          <h4>2024 - Present</h4>
+          <p>Now I am learning AI-based web development, integrating artificial intelligence technologies to create smarter, more intuitive websites. This includes exploring machine learning APIs, implementing AI-powered chatbots, and using AI tools to enhance user experiences and automate complex tasks in web applications.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <p>&copy; 2025 Ahoshan Habib. All Rights Reserved.</p>
+        <div class="social-icons">
+          <a href="https://www.facebook.com/ahoshanashik/"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="https://github.com/ahoshanashik"><i class="fab fa-github"></i></a>
+        </div>
+        <p>Web Designer & Developer | Technology Enthusiast</p>
+      </div>
+    </footer>
   </body>
 </html>     
-<style>  
-      
-   .purple{color:#cc66ff ;}
-
-   
-
-     .half{ width: 50%;
-
-    float: left;}
-
-     .side{width:100% ;
-
-    padding-left:5%; 
-
-    margin-right:10px ;
-
-    border-radius:15px;}
-
-    .btn{color: white;
-
-     background-color: #8845f4;
-
-    padding: 13px 35px;
-
-    border-radius: 20px;
-
-    text-decoration: none;
-
-   margin-left:15px;
-  margin-top:40px; }
-
-
-   h2{font-size: 1.5em;
-
-   text-align:center ;
-
-  }
-
-    h3{text-align:center; }
-
- 
-
- .containe{ padding-left: 7%;
-
-    display:inline-block;
-
-    border:5px #6600cc solid ;
-
-    border-radius:10px ;}
-
-    .experience{padding: 10px;
-
-    border-left:2px solid #cc33ff;
-  margin-top:27px; }
-
-    .foot{background-color: black ;
-
-    color:white ;
-
-    border-radius: 15px;}
-
-    a{text-decoration:none ;}
-
-    .contact{padding-left: 90px;}
- img{border-radius:10px;}
-</style>
-
-
-
-
-
-
-
-  
