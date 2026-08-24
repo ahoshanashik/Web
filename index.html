@@ -1,512 +1,667 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahoshan Habib - Web Developer</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-      /* Base styles */
-      :root {
-        --primary: #00b894;
-        --primary-light: #55efc4;
-        --secondary: #1e272e;
-        --dark: #121212;
-        --accent: #a29bfe;
-        --text: #dfe6e9;
-        --bg-dark: #1e272e;
-        --card-bg: #2d3436;
-      }
-      
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      
-      body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        line-height: 1.6;
-        color: var(--text);
-        background-color: var(--dark);
-        overflow-x: hidden;
-      }
-      
-      .container {
-        width: 100%;
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-      }
-      
-      h1, h2, h3, h4 {
-        margin-bottom: 1rem;
-        color: var(--text);
-        font-weight: 700;
-      }
-      
-      img {
-        max-width: 70%;
-        height: auto;
-        border-radius: 12px;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      }
-      
-      img:hover {
-        transform: translateY(-8px) scale(1.02);
-        box-shadow: 0 15px 30px rgba(0,184,148,0.3);
-      }
-      
-      .btn {
-        display: inline-block;
-        background-color: var(--primary);
-        color: var(--dark);
-        padding: 12px 30px;
-        border-radius: 30px;
-        text-decoration: none;
-        font-weight: 600;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        margin-top: 20px;
-        border: 2px solid var(--primary);
-        position: relative;
-        overflow: hidden;
-        z-index: 1;
-      }
-      
-      .btn:after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 0;
-        background-color: var(--secondary);
-        transition: all 0.3s ease;
-        z-index: -1;
-      }
-      
-      .btn:hover {
-        color: var(--primary);
-      }
-      
-      .btn:hover:after {
-        height: 100%;
-      }
-      
-      .highlight {
-        color: var(--primary);
-        font-weight: 600;
-      }
-      
-      /* Header */
-      header {
-        padding: 100px 0 80px;
-        text-align: center;
-        background: linear-gradient(135deg, var(--dark) 0%, var(--bg-dark) 100%);
-        color: white;
-        position: relative;
-        overflow: hidden;
-        margin-bottom: 80px;
-      }
-      
-      header::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(45deg, var(--primary) 0%, transparent 70%);
-        opacity: 0.1;
-      }
-      
-      header::after {
-        content: '';
-        position: absolute;
-        bottom: -50px;
-        left: 0;
-        width: 100%;
-        height: 100px;
-        background-color: var(--dark);
-        clip-path: polygon(0 0, 100% 50%, 100% 100%, 0 100%);
-      }
-      
-      header h1 {
-        font-size: 3.5rem;
-        margin-bottom: 1.5rem;
-        color: white;
-        position: relative;
-      }
-      
-      header h3 {
-        font-size: 1.6rem;
-        font-weight: 400;
-        margin-bottom: 2rem;
-        color: var(--primary-light);
-        opacity: 0.9;
-      }
-      
-      /* About Section */
-      .about {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 40px;
-        margin-bottom: 100px;
-        align-items: center;
-        position: relative;
-      }
-      
-      .about::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 200px;
-        height: 200px;
-        background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
-        opacity: 0.1;
-        z-index: -1;
-        border-radius: 50%;
-      }
-      
-      .about-content, .about-image {
-        align-content: center;
-        flex: 1 1 400px;
-      }
-      
-      .about-content p {
-        margin-bottom: 20px;
-        font-size: 1.1rem;
-        line-height: 1.8;
-      }
-      
-      .about-image, .dream-image {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-      
-      .about-image img, .dream-image img {
-        display: block;
-        margin: 0 auto;
-      }
-      
-      /* Dream Section */
-      .dream {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 40px;
-        margin-bottom: 100px;
-        align-items: center;
-        background-color: var(--card-bg);
-        padding: 60px 30px;
-        border-radius: 16px;
-        position: relative;
-        overflow: hidden;
-      }
-      
-      .dream::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 5px;
-        background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
-      }
-      
-      .dream-content, .dream-image {
-        flex: 1 1 400px;
-      }
-      
-      .dream h2 {
-        font-size: 2.2rem;
-        margin-bottom: 1.5rem;
-      }
-      
-      .dream h3 {
-        font-size: 1.4rem;
-        color: var(--primary-light);
-        margin-bottom: 1.5rem;
-      }
-      
-      .dream p {
-        font-size: 1.1rem;
-        line-height: 1.8;
-      }
-      
-      /* Experience Section */
-      .experiences {
-        margin-bottom: 100px;
-      }
-      
-      .experiences h2 {
-        font-size: 2.2rem;
-        margin-bottom: 2rem;
-        text-align: center;
-        position: relative;
-        display: inline-block;
-      }
-      
-      .experiences h2::after {
-        content: '';
-        position: absolute;
-        bottom: -10px;
-        left: 0;
-        width: 100%;
-        height: 3px;
-        background: linear-gradient(90deg, var(--primary) 0%, transparent 100%);
-      }
-      
-      .experience {
-        padding: 30px;
-        border-left: 4px solid var(--primary);
-        margin-bottom: 30px;
-        background-color: var(--card-bg);
-        border-radius: 0 16px 16px 0;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        transition: all 0.4s ease;
-        position: relative;
-        overflow: hidden;
-      }
-      
-      .experience::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(45deg, var(--primary) 0%, transparent 100%);
-        opacity: 0;
-        transition: opacity 0.4s ease;
-        z-index: 0;
-      }
-      
-      .experience:hover {
-        transform: translateX(10px);
-      }
-      
-      .experience:hover::before {
-        opacity: 0.05;
-      }
-      
-      .experience h4 {
-        font-size: 1.3rem;
-        color: var(--primary);
-        margin-bottom: 1rem;
-        position: relative;
-        z-index: 1;
-      }
-      
-      .experience p {
-        position: relative;
-        z-index: 1;
-        font-size: 1.1rem;
-        line-height: 1.7;
-      }
-      
-      .experience-new {
-        position: relative;
-      }
-      
-      .experience-new::after {
-        content: 'NEW';
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background-color: var(--primary);
-        color: var(--dark);
-        padding: 5px 10px;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: 700;
-      }
-      
-      /* Footer */
-      footer {
-        background-color: var(--secondary);
-        color: white;
-        text-align: center;
-        padding: 40px 0;
-        margin-top: 50px;
-        position: relative;
-        overflow: hidden;
-      }
-      
-      footer::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 5px;
-        background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
-      }
-      
-      .social-icons {
-        margin: 25px 0;
-      }
-      
-      .social-icons a {
-        color: var(--text);
-        font-size: 1.8rem;
-        margin: 0 15px;
-        transition: all 0.3s ease;
-        display: inline-block;
-      }
-      
-      .social-icons a:hover {
-        color: var(--primary);
-        transform: translateY(-5px);
-      }
-      
-      /* Responsive */
-      @media screen and (max-width: 768px) {
-        header {
-          padding: 70px 0 100px;
-        }
-        
-        header h1 {
-          font-size: 2.5rem;
-        }
-        
-        .about, .dream {
-          flex-direction: column;
-        }
-        
-        .dream-image {
-          order: -1;
-        }
-        
-        .experience {
-          padding: 25px;
-        }
-      }
-      
-      @media screen and (max-width: 480px) {
-        header h1 {
-          font-size: 2rem;
-        }
-        
-        header h3 {
-          font-size: 1.2rem;
-        }
-        
-        .experience {
-          padding: 20px;
-        }
-      }
-      
-      /* Animations */
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      
-      section {
-        animation: fadeIn 0.8s ease forwards;
-      }
-      
-      .about {
-        animation-delay: 0.2s;
-      }
-      
-      .dream {
-        animation-delay: 0.4s;
-      }
-      
-      .experiences {
-        animation-delay: 0.6s;
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <div class="container">
-        <h1>Welcome to <span class="highlight">Ahoshan Habib</span>'s Portfolio</h1>
-        <h3>Web Designer & Developer</h3>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahoshan Habib — Web Designer &amp; Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0D1117;
+    --bg-raised: #131922;
+    --surface: #161B22;
+    --surface-hover: #1C2430;
+    --line: #262E3A;
+    --text: #E6EDF3;
+    --text-dim: #8B949E;
+    --text-faint: #5B6472;
+    --amber: #E3B341;
+    --green: #7EE787;
+    --paper: #F3F1EC;
+    --radius: 10px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+
+  ::selection{ background:var(--amber); color:#0D1117; }
+
+  a{ color:inherit; text-decoration:none; }
+
+  .mono{ font-family:'JetBrains Mono', monospace; }
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* subtle background grid, like an editor gutter */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    opacity:0.05;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:rgba(13,17,23,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+
+  .nav-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 32px;
+    max-width:1080px;
+    margin:0 auto;
+    height:52px;
+  }
+
+  .nav-tabs{
+    display:flex;
+    height:100%;
+  }
+
+  .nav-tab{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:0 18px;
+    font-size:13px;
+    color:var(--text-dim);
+    border-right:1px solid var(--line);
+    height:100%;
+    transition:color 0.2s, background 0.2s;
+    cursor:pointer;
+  }
+
+  .nav-tab:first-child{ border-left:1px solid var(--line); }
+
+  .nav-tab:hover{ color:var(--text); background:var(--surface-hover); }
+
+  .nav-tab .dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--text-faint);
+  }
+
+  .nav-tab.hire .dot{ background:var(--green); }
+  .nav-tab.hire{ color:var(--green); }
+
+  .nav-brand{
+    font-size:13px;
+    color:var(--text-faint);
+    display:flex;
+    gap:6px;
+    align-items:center;
+  }
+
+  @media (max-width:720px){
+    .nav-tabs .label{ display:none; }
+    .nav-tab{ padding:0 12px; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    z-index:1;
+    padding:120px 0 100px;
+  }
+
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:56px;
+    align-items:center;
+  }
+
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--amber);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:22px;
+  }
+
+  .eyebrow::before{
+    content:"";
+    width:22px; height:1px;
+    background:var(--amber);
+  }
+
+  h1.display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(42px, 6vw, 72px);
+    line-height:1.03;
+    letter-spacing:-0.01em;
+    margin-bottom:20px;
+  }
+
+  h1.display em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--amber);
+  }
+
+  .hero-role{
+    font-size:18px;
+    color:var(--text-dim);
+    margin-bottom:28px;
+  }
+
+  .hero-role .cursor{
+    display:inline-block;
+    width:2px;
+    height:18px;
+    background:var(--green);
+    margin-left:2px;
+    vertical-align:-3px;
+    animation:blink 1s step-end infinite;
+  }
+
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .hero-copy{
+    color:var(--text-dim);
+    font-size:16px;
+    max-width:46ch;
+    margin-bottom:36px;
+  }
+
+  .btn-row{ display:flex; gap:14px; flex-wrap:wrap; }
+
+  .btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    padding:12px 20px;
+    border-radius:6px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+    border:1px solid var(--line);
+  }
+
+  .btn-primary{
+    background:var(--amber);
+    color:#0D1117;
+    font-weight:700;
+    border-color:var(--amber);
+  }
+
+  .btn-primary:hover{ transform:translateY(-1px); background:#f0c05c; }
+
+  .btn-ghost{ color:var(--text); }
+  .btn-ghost:hover{ border-color:var(--text-faint); background:var(--surface); }
+
+  /* code editor window */
+  .editor{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+
+  .editor-bar{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 16px;
+    border-bottom:1px solid var(--line);
+    background:var(--bg-raised);
+  }
+
+  .editor-bar .traffic{ display:flex; gap:6px; }
+  .editor-bar .traffic span{ width:10px; height:10px; border-radius:50%; }
+  .editor-bar .traffic span:nth-child(1){ background:#FF5F56; }
+  .editor-bar .traffic span:nth-child(2){ background:#FFBD2E; }
+  .editor-bar .traffic span:nth-child(3){ background:#27C93F; }
+
+  .editor-bar .filename{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--text-faint);
+    margin-left:6px;
+  }
+
+  .editor-body{
+    padding:22px 22px 26px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:13.5px;
+    line-height:1.85;
+  }
+
+  .editor-body .ln{ color:var(--text-faint); display:inline-block; width:20px; user-select:none; }
+  .kw{ color:#FF7B72; }
+  .prop{ color:#79C0FF; }
+  .str{ color:var(--green); }
+  .num{ color:var(--amber); }
+  .cm{ color:var(--text-faint); }
+
+  @media (max-width:840px){
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero{ padding:80px 0 60px; }
+  }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{
+    position:relative;
+    z-index:1;
+    padding:90px 0;
+    border-top:1px solid var(--line);
+  }
+
+  .section-head{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    margin-bottom:44px;
+  }
+
+  .section-num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--amber);
+  }
+
+  .section-title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(28px, 3.4vw, 38px);
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:56px;
+    align-items:start;
+  }
+
+  .about-photo{
+    width:100%;
+    aspect-ratio:4/5;
+    border-radius:var(--radius);
+    overflow:hidden;
+    border:1px solid var(--line);
+    background:var(--surface);
+  }
+
+  .about-photo img{ width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(35%) contrast(1.05); }
+
+  .about-text p{ color:var(--text-dim); font-size:16.5px; margin-bottom:18px; max-width:56ch; }
+  .about-text p strong{ color:var(--text); font-weight:600; }
+
+  .tag-row{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px; }
+  .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    padding:7px 12px;
+    border:1px solid var(--line);
+    border-radius:6px;
+    color:var(--text-dim);
+  }
+
+  @media (max-width:840px){ .about-grid{ grid-template-columns:1fr; } .about-photo{ max-width:280px; } }
+
+  /* ---------- DREAM (pull quote / manifesto) ---------- */
+  .dream{
+    background:var(--bg-raised);
+  }
+
+  .dream-inner{
+    position:relative;
+    padding:8px 0 8px 28px;
+    border-left:2px solid var(--amber);
+  }
+
+  .dream-tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--amber);
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    margin-bottom:14px;
+    display:block;
+  }
+
+  .dream blockquote{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    font-style:italic;
+    font-size:clamp(22px, 2.6vw, 30px);
+    line-height:1.4;
+    color:var(--paper);
+    max-width:44ch;
+    margin-bottom:22px;
+  }
+
+  .dream p{
+    color:var(--text-dim);
+    font-size:15.5px;
+    max-width:58ch;
+    margin-bottom:14px;
+  }
+
+  /* ---------- CHANGELOG (experience) ---------- */
+  .log-entry{
+    display:grid;
+    grid-template-columns:120px 1fr;
+    gap:28px;
+    padding:28px 0;
+    border-top:1px solid var(--line);
+  }
+  .log-entry:last-child{ border-bottom:1px solid var(--line); }
+
+  .log-version{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--amber);
+    background:rgba(227,179,65,0.08);
+    border:1px solid rgba(227,179,65,0.25);
+    border-radius:6px;
+    padding:4px 10px;
+    height:fit-content;
+    white-space:nowrap;
+  }
+
+  .log-current .log-version{
+    color:var(--green);
+    background:rgba(126,231,135,0.08);
+    border-color:rgba(126,231,135,0.3);
+  }
+
+  .log-date{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--text-faint);
+    margin-bottom:8px;
+    display:block;
+  }
+
+  .log-title{
+    font-family:'Fraunces', serif;
+    font-size:20px;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+
+  .log-desc{ color:var(--text-dim); font-size:15px; max-width:60ch; margin-bottom:12px; }
+
+  .diff{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--green);
+    display:flex;
+    align-items:flex-start;
+    gap:8px;
+    margin-top:4px;
+  }
+  .diff span.plus{ color:var(--green); }
+
+  @media (max-width:600px){
+    .log-entry{ grid-template-columns:1fr; gap:10px; }
+  }
+
+  /* ---------- FREELANCE CALLOUT ---------- */
+  .callout{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:32px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:36px 40px;
+    flex-wrap:wrap;
+  }
+
+  .callout-left .kicker{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--green);
+    margin-bottom:10px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .callout-left .kicker .pulse{
+    width:8px; height:8px; border-radius:50%; background:var(--green);
+    box-shadow:0 0 0 0 rgba(126,231,135,0.6);
+    animation:pulse 1.8s infinite;
+  }
+  @keyframes pulse{
+    0%{ box-shadow:0 0 0 0 rgba(126,231,135,0.5); }
+    70%{ box-shadow:0 0 0 8px rgba(126,231,135,0); }
+    100%{ box-shadow:0 0 0 0 rgba(126,231,135,0); }
+  }
+
+  .callout-left h3{
+    font-family:'Fraunces', serif;
+    font-size:24px;
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .callout-left p{ color:var(--text-dim); font-size:15px; max-width:48ch; }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    padding:60px 0 40px;
+    border-top:1px solid var(--line);
+    position:relative; z-index:1;
+  }
+
+  .footer-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+  }
+
+  .footer-links{ display:flex; gap:22px; flex-wrap:wrap; }
+  .footer-links a{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--text-dim);
+    transition:color 0.15s;
+  }
+  .footer-links a:hover{ color:var(--amber); }
+
+  .footer-note{ color:var(--text-faint); font-size:13px; font-family:'JetBrains Mono', monospace; }
+
+  /* reveal on scroll */
+  .reveal{ opacity:0; transform:translateY(14px); transition:opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .cursor, .pulse{ animation:none; }
+  }
+
+  :focus-visible{ outline:2px solid var(--amber); outline-offset:3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <nav class="nav-tabs">
+      <a href="#about" class="nav-tab"><span class="dot"></span><span class="label mono">about.js</span></a>
+      <a href="#dream" class="nav-tab"><span class="dot"></span><span class="label mono">dream.js</span></a>
+      <a href="#log" class="nav-tab"><span class="dot"></span><span class="label mono">log.md</span></a>
+      <a href="https://www.fiverr.com/awesomeahoshan" class="nav-tab hire" target="_blank" rel="noopener"><span class="dot"></span><span class="label mono">hire.js</span></a>
+    </nav>
+    <div class="nav-brand mono">~/ahoshan-habib</div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" style="border-top:none; padding-top:120px;">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <h1 class="display">Ahoshan<br>Habib<em>.</em></h1>
+          <div class="hero-role mono">Web Designer &amp; Developer<span class="cursor"></span></div>
+          <p class="hero-copy">I build clean, responsive, user-friendly websites — from hand-coded HTML &amp; CSS to dynamic JavaScript and WordPress builds. Currently teaching myself to fold AI into the front end, one project at a time.</p>
+          <div class="btn-row">
+            <a href="https://www.fiverr.com/awesomeahoshan" class="btn btn-primary" target="_blank" rel="noopener">Work with me →</a>
+            <a href="https://github.com/ahoshanashik" class="btn btn-ghost" target="_blank" rel="noopener">View GitHub</a>
+          </div>
+        </div>
+        <div class="editor reveal">
+          <div class="editor-bar">
+            <div class="traffic"><span></span><span></span><span></span></div>
+            <div class="filename">developer.json</div>
+          </div>
+          <div class="editor-body">
+<div><span class="ln">1</span><span class="kw">const</span> developer = {</div>
+<div><span class="ln">2</span>&nbsp;&nbsp;<span class="prop">name</span>: <span class="str">"Ahoshan Habib"</span>,</div>
+<div><span class="ln">3</span>&nbsp;&nbsp;<span class="prop">role</span>: <span class="str">"Web Designer & Developer"</span>,</div>
+<div><span class="ln">4</span>&nbsp;&nbsp;<span class="prop">stack</span>: [<span class="str">"HTML5"</span>, <span class="str">"CSS3"</span>, <span class="str">"JavaScript"</span>, <span class="str">"Bootstrap"</span>],</div>
+<div><span class="ln">5</span>&nbsp;&nbsp;<span class="prop">learning</span>: <span class="str">"AI-assisted web dev"</span>,</div>
+<div><span class="ln">6</span>&nbsp;&nbsp;<span class="prop">status</span>: <span class="str">"open to work"</span> <span class="cm">// on Fiverr</span></div>
+<div><span class="ln">7</span>};</div>
+          </div>
+        </div>
       </div>
-    </header>
+    </div>
+  </section>
 
-    <main class="container">
-      <!-- About Section -->
-      <section class="about">
-        <div class="about-content">
-          <h2>About Me</h2>
-          <p>Hello! Welcome to my digital workspace. I am passionate about creating elegant, functional web experiences and have mastered <span class="highlight">HTML & CSS</span> to bring designs to life. Currently, I'm expanding my skills with <span class="highlight">HTML5, JavaScript, and Bootstrap</span> to build more dynamic and responsive websites.</p>
-          <p>This portfolio showcases my journey and skills in web development. If you need a website that stands out from the crowd with modern design and smooth functionality, I'd love to collaborate with you.</p>
-          <!-- Put thiscode anywhere in the body of your page where you want the badge to show up. -->
-
-<div itemscope itemtype='http://schema.org/Person' class='fiverr-seller-widget' style='display: inline-block;'>
-     <a itemprop='url' href=https://www.fiverr.com/awesomeahoshan rel="nofollow" target="_blank" style='display: inline-block;'>
-        <div class='fiverr-seller-content' id='fiverr-seller-widget-content-6c1d112f-b545-4dcf-82a5-69cfb8b81ac2' itemprop='contentURL' style='display: none;'></div>
-        <div id='fiverr-widget-seller-data' style='display: none;'>
-            <div itemprop='name' >awesomeahoshan</div>
-            <div itemscope itemtype='http://schema.org/Organization'><span itemprop='name'>Fiverr</span></div>
-            <div itemprop='jobtitle'>Seller</div>
-            <div itemprop='description'>Responsive Website Expert with HTML, CSS, JS or WordPress
-
-Hey there ! I am ahoshan.
-
-I'm a skilled web developer with a passion for building clean, responsive, and user-friendly websites using HTML, CSS, JavaScript, and WordPress. Whether you need a custom-coded site or a dynamic WordPress solution, I can help bring your vision to life.
-
-SO,let’s build something powerful and user-friendly.</div>
-        </div>
-    </a>
-</div>
-
-<script id='fiverr-seller-widget-script-6c1d112f-b545-4dcf-82a5-69cfb8b81ac2' src='https://widgets.fiverr.com/api/v1/seller/awesomeahoshan?widget_id=6c1d112f-b545-4dcf-82a5-69cfb8b81ac2' data-config='{"category_name":"\n                                    Programming \u0026 Tech\n\n                            "}' async='true' defer='true'></script>
-          
-        </div>
-        <div class="about-image">
-          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiPjRlUJPNUwBpyXkmWZW9Vzr_wei5hwicUcMAj90yhn8RtaI-cTuZ7GOf5Sq6YjrgmmCQqrcbZj6BHJER32gmdeOvYi70eO3qlCwYZxWcgt12_LRqUXNbmn7I1E6GyYQif2hRKZycJ3C7tkhcLzONxHh2KOuRJoUPI0GQK-CeCk0sv-qKsCu65upeexrwn/s1600/IMG_7367.JPG" alt="Ahoshan Habib" />
-        </div>
-      </section>
-
-      <!-- Dream Section -->
-      <section class="dream">
-        <div class="dream-content">
-          <h2>BIG DREAM</h2>
-          <h3>Become an Elite Web Developer</h3>
-          <p>I envision creating websites and applications that not only look stunning but also solve real-world problems. My goal is to develop a popular platform that reaches thousands of users worldwide. To achieve this vision, I'm fully committed to mastering the complete web development stack, from front-end to back-end technologies.</p>
-          <p>After establishing myself in web development, I plan to expand my expertise to include advanced programming concepts and mobile app development, creating a seamless ecosystem of digital products.</p>
-        </div>
-        <div class="dream-image">
-          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgZvjDcinOJ63F6I4-ovb2ISAbVBaXQn8YfYNLvuFNJvE55gH1f2BbAHZnAN7mjdmedTuYW0WhFZG0wJbaImFBG7rLlULME8IpR3_UPS4FBcPXzkXg4IDeE9enveRCOCA1A4ff3p8Bw_IWu/s320/IMG_20201204_220528.jpg" alt="Dream visualization" />
-        </div>
-      </section>
-
-      <!-- Experience Section -->
-      <section class="experiences">
-        <h2>EXPERIENCES</h2>
-        <div class="experience">
-          <h4>January 2020 - November 2020</h4>
-          <p>I built a strong foundation in web development by mastering HTML & CSS fundamentals. During this period, I practiced extensively by building various web layouts and components, including this portfolio website.</p>
-        </div>
-        <div class="experience">
-          <h4>November 2020 - 2021</h4>
-          <p>Advanced to becoming proficient in HTML & CSS while expanding my knowledge into JavaScript fundamentals and modern HTML5 features. I've been creating more interactive and dynamic web experiences with these expanded skills.</p>
-        </div>
-        <div class="experience experience-new">
-          <h4>2024 - Present</h4>
-          <p>Now I am learning AI-based web development, integrating artificial intelligence technologies to create smarter, more intuitive websites. This includes exploring machine learning APIs, implementing AI-powered chatbots, and using AI tools to enhance user experiences and automate complex tasks in web applications.</p>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      <div class="container">
-        <p>&copy; 2025 Ahoshan Habib. All Rights Reserved.</p>
-        <div class="social-icons">
-          <a href="https://www.facebook.com/ahoshanashik/"><i class="fab fa-facebook"></i></a>
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-linkedin"></i></a>
-          <a href="https://github.com/ahoshanashik"><i class="fab fa-github"></i></a>
-        </div>
-        <p>Web Designer & Developer | Technology Enthusiast</p>
+  <section id="about">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-num">01</span>
+        <h2 class="section-title">About</h2>
       </div>
-    </footer>
-  </body>
-</html>     
+      <div class="about-grid">
+        <div class="about-photo reveal">
+          <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiPjRlUJPNUwBpyXkmWZW9Vzr_wei5hwicUcMAj90yhn8RtaI-cTuZ7GOf5Sq6YjrgmmCQqrcbZj6BHJER32gmdeOvYi70eO3qlCwYZxWcgt12_LRqUXNbmn7I1E6GyYQif2hRKZycJ3C7tkhcLzONxHh2KOuRJoUPI0GQK-CeCk0sv-qKsCu65upeexrwn/s1600/IMG_7367.JPG" alt="Ahoshan Habib">
+        </div>
+        <div class="about-text reveal">
+          <p>Welcome to my digital workspace. I'm <strong>passionate about creating elegant, functional web experiences</strong>, and I've built a solid foundation in HTML &amp; CSS. Right now I'm expanding into HTML5, JavaScript, and Bootstrap to ship sites that feel more dynamic and responsive.</p>
+          <p>On Fiverr I work with clients who need a website that stands out — custom-coded or WordPress, clean and user-friendly either way. If that's you, <strong>let's build something powerful together</strong>.</p>
+          <div class="tag-row">
+            <span class="tag">HTML5</span>
+            <span class="tag">CSS3</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">Bootstrap</span>
+            <span class="tag">WordPress</span>
+            <span class="tag">Responsive Design</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dream" class="dream">
+    <div class="wrap">
+      <div class="dream-inner reveal">
+        <span class="dream-tag">Big Dream</span>
+        <blockquote>"Become an elite web developer — and build the ecosystem to match."</blockquote>
+        <p>I want to make websites and applications that don't just look good, but solve real problems for the people using them. The goal is a platform that reaches thousands of users — and a career built on getting there deliberately.</p>
+        <p>That means mastering the full stack, front to back, before expanding into advanced programming and mobile app development — one connected ecosystem of digital products, built one skill at a time.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="log">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-num">02</span>
+        <h2 class="section-title">Changelog</h2>
+      </div>
+
+      <div class="log-entry reveal">
+        <span class="log-version">v1.0.0</span>
+        <div>
+          <span class="log-date">Jan 2020 — Nov 2020</span>
+          <div class="log-title">Foundations</div>
+          <p class="log-desc">Built a strong base in HTML &amp; CSS fundamentals, practicing by hand-coding layouts and components — including the first version of this very portfolio.</p>
+          <div class="diff"><span class="plus">+</span> HTML &amp; CSS fundamentals, first layouts shipped</div>
+        </div>
+      </div>
+
+      <div class="log-entry reveal">
+        <span class="log-version">v2.0.0</span>
+        <div>
+          <span class="log-date">Nov 2020 — 2021</span>
+          <div class="log-title">Interactivity</div>
+          <p class="log-desc">Grew more fluent in HTML &amp; CSS while picking up JavaScript fundamentals and modern HTML5 features — the first steps toward interactive, dynamic pages.</p>
+          <div class="diff"><span class="plus">+</span> JavaScript fundamentals, HTML5 features</div>
+        </div>
+      </div>
+
+      <div class="log-entry log-current reveal">
+        <span class="log-version">v3.0.0-current</span>
+        <div>
+          <span class="log-date">2024 — Present</span>
+          <div class="log-title">Intelligence</div>
+          <p class="log-desc">Now learning AI-based web development — exploring ML APIs, AI-powered chatbots, and tools that make sites smarter and automate the tedious parts.</p>
+          <div class="diff"><span class="plus">+</span> AI-assisted workflows, ML APIs, smart chat interfaces</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="callout reveal">
+        <div class="callout-left">
+          <div class="kicker"><span class="pulse"></span>AVAILABLE FOR WORK</div>
+          <h3>Need a site that stands out?</h3>
+          <p>Responsive, custom-coded or WordPress — I'll help bring your vision to life on Fiverr.</p>
+        </div>
+        <a href="https://www.fiverr.com/awesomeahoshan" class="btn btn-primary" target="_blank" rel="noopener">Hire me on Fiverr →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="footer-note">© 2025 Ahoshan Habib. All rights reserved.</div>
+    <div class="footer-links">
+      <a href="https://www.facebook.com/ahoshanashik/" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://github.com/ahoshanashik" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.fiverr.com/awesomeahoshan" target="_blank" rel="noopener">Fiverr</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
