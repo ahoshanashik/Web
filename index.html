@@ -471,6 +471,72 @@
   }
   .callout-left p{ color:var(--text-dim); font-size:15px; max-width:48ch; }
 
+  /* ---------- PROJECTS ---------- */
+  .project-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:20px;
+  }
+
+  .project-card{
+    display:flex;
+    flex-direction:column;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:26px 24px;
+    transition:transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+  }
+  .project-card:hover{ transform:translateY(-2px); border-color:var(--text-faint); background:var(--surface-hover); }
+
+  .project-meta{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    color:var(--text-faint);
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:16px;
+  }
+  .project-meta .status{ color:var(--green); }
+  .project-meta .status.wip{ color:var(--amber); }
+
+  .project-title{
+    font-family:'Fraunces', serif;
+    font-size:21px;
+    font-weight:600;
+    margin-bottom:10px;
+  }
+
+  .project-desc{ color:var(--text-dim); font-size:15px; margin-bottom:20px; flex-grow:1; }
+
+  .project-card .tag-row{ margin-top:0; margin-bottom:20px; }
+
+  .project-link{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--amber);
+  }
+
+  /* ---------- AD UNIT ---------- */
+  .ad-section{ padding:48px 0; }
+
+  .ad-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    text-align:center;
+    margin-bottom:12px;
+  }
+
+  .ad-slot{
+    min-height:90px;
+    display:flex;
+    justify-content:center;
+    overflow:hidden;
+  }
+
   /* ---------- FOOTER ---------- */
   footer{
     padding:60px 0 40px;
@@ -515,6 +581,7 @@
   <div class="nav-inner">
     <nav class="nav-tabs">
       <a href="#about" class="nav-tab"><span class="dot"></span><span class="label mono">about.js</span></a>
+      <a href="#projects" class="nav-tab"><span class="dot"></span><span class="label mono">projects.js</span></a>
       <a href="#dream" class="nav-tab"><span class="dot"></span><span class="label mono">dream.js</span></a>
       <a href="#log" class="nav-tab"><span class="dot"></span><span class="label mono">log.md</span></a>
       <a href="https://www.fiverr.com/awesomeahoshan" class="nav-tab hire" target="_blank" rel="noopener"><span class="dot"></span><span class="label mono">hire.js</span></a>
@@ -581,6 +648,31 @@
     </div>
   </section>
 
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="section-num">02</span>
+        <h2 class="section-title">Projects</h2>
+      </div>
+      <div class="project-grid">
+        <div class="project-card reveal">
+          <div class="project-meta"><span>01 / desktop app</span><span class="status">● windows</span></div>
+          <h3 class="project-title">PixelForge PDF Studio</h3>
+          <p class="project-desc">A full-featured, 100% offline desktop PDF workspace built with Python and Microsoft Edge WebView2. Features a 25-tool annotation studio, dual-document side-by-side comparison, full-text in-document search, lossless PDF merging, and multi-format offline conversion (PDF to Word, PowerPoint, and ZIP).</p>
+          <div class="tag-row"><span class="tag">Python</span><span class="tag">pywebview</span><span class="tag">WebView2 (Chromium)</span><span class="tag">JavaScript (ES6+)</span><span class="tag">PDF.js</span><span class="tag">pypdf</span><span class="tag">HTML5/CSS3</span></div>
+          <span class="project-link">Native Windows desktop app</span>
+        </div>
+        <a href="https://pixforgestudio.com" class="project-card reveal" target="_blank" rel="noopener">
+          <div class="project-meta"><span>02 / web suite</span><span class="status">● live</span></div>
+          <h3 class="project-title">PixForgeStudio</h3>
+          <p class="project-desc">A high-performance, privacy-first browser suite with 140+ free tools for PDF editing, image processing, media conversion, developer utilities, and scientific calculators. Its strict zero-upload architecture processes every file client-side using Web Workers, HTML5 Canvas, and Web APIs. Deployed as a fast static edge app with automated programmatic SEO and structured schema markup.</p>
+          <div class="tag-row"><span class="tag">Next.js 14</span><span class="tag">TypeScript</span><span class="tag">Tailwind CSS</span><span class="tag">WebAssembly</span><span class="tag">Canvas API</span><span class="tag">Cloudflare Pages</span></div>
+          <span class="project-link">pixforgestudio.com →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <section id="dream" class="dream">
     <div class="wrap">
       <div class="dream-inner reveal">
@@ -595,7 +687,7 @@
   <section id="log">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="section-num">02</span>
+        <span class="section-num">03</span>
         <h2 class="section-title">Changelog</h2>
       </div>
 
@@ -640,6 +732,15 @@
           <p>Responsive, custom-coded or WordPress — I'll help bring your vision to life on Fiverr.</p>
         </div>
         <a href="https://www.fiverr.com/awesomeahoshan" class="btn btn-primary" target="_blank" rel="noopener">Hire me on Fiverr →</a>
+      </div>
+    </div>
+  </section>
+  <section class="ad-section" aria-label="Advertisement">
+    <div class="wrap">
+      <div class="ad-label">Advertisement</div>
+      <div class="ad-slot">
+        <script async="async" data-cfasync="false" src="https://bauval.org/21/a96de0121d378c0e2e64c361ffdb6db9"></script>
+        <div id="container-a96de0121d378c0e2e64c361ffdb6db9"></div>
       </div>
     </div>
   </section>
